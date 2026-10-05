@@ -15,6 +15,9 @@ import {
   FaMoneyBill,
   FaTruck,
   FaCheck,
+  FaLocationDot,
+  FaChevronRight,
+  FaGear,
 } from "react-icons/fa6";
 
 const API_BASE = "https://ecommerce.routemisr.com/api/v1";
@@ -73,64 +76,60 @@ export default function OrdersPage() {
 
   if (!isAuthenticated) {
     return (
-      <>
-        <PageHeader
-          icon="FaClockRotateLeft"
-          title="Order History"
-          description="Track your past orders"
-          breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Profile", href: "/profile" },
-            { label: "Orders" },
-          ]}
-          gradientClass="bg-gradient-to-br from-primary-600 via-primary-500 to-emerald-400"
+      <div className="container mx-auto px-4 py-8">
+        <EmptyState
+          icon="FaBoxOpen"
+          title="Please Sign In"
+          description="You need to be signed in to view your orders."
+          actionLabel="Sign In"
+          actionHref="/login"
         />
-        <div className="container mx-auto px-4 py-8">
-          <EmptyState
-            icon="FaBoxOpen"
-            title="Please Sign In"
-            description="You need to be signed in to view your orders."
-            actionLabel="Sign In"
-            actionHref="/login"
-          />
-        </div>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <PageHeader
-        icon="FaClockRotateLeft"
-        title="Order History"
-        description="Track your past orders"
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Profile", href: "/profile" },
-          { label: "Orders" },
-        ]}
-        gradientClass="bg-gradient-to-br from-primary-600 via-primary-500 to-emerald-400"
-      />
-
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div className="container mx-auto px-4 py-8">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Link
-                  href="/profile"
-                  className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors text-sm"
+                  href="/profile/addresses"
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl transition-colors text-gray-600 hover:bg-gray-50"
                 >
-                  <FaPen className="text-xs" />
-                  Edit Profile
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-gray-100 text-gray-400">
+                    <FaLocationDot className="text-sm" />
+                  </div>
+                  <span className="flex-1 text-sm font-medium">
+                    My Addresses
+                  </span>
+                  <FaChevronRight className="text-xs text-gray-300" />
                 </Link>
                 <Link
                   href="/profile/orders"
-                  className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-primary-50 text-primary-600 font-medium text-sm"
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl transition-colors bg-primary-50 text-primary-700"
                 >
-                  <FaClockRotateLeft className="text-xs" />
-                  Order History
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-primary-100 text-primary-600">
+                    <FaClockRotateLeft className="text-sm" />
+                  </div>
+                  <span className="flex-1 text-sm font-semibold">
+                    Account Overview
+                  </span>
+                  <FaChevronRight className="text-xs text-primary-400" />
+                </Link>
+                <Link
+                  href="/profile/settings"
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl transition-colors text-gray-600 hover:bg-gray-50"
+                >
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-gray-100 text-gray-400">
+                    <FaGear className="text-sm" />
+                  </div>
+                  <span className="flex-1 text-sm font-medium">
+                    Account Settings
+                  </span>
+                  <FaChevronRight className="text-xs text-gray-300" />
                 </Link>
               </div>
             </div>
